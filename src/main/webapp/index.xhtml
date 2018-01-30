@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Gerenciador de produtos 1.0</title>
+    </h:head>
+    <h:body>
+    <h:outputStylesheet library="css" name="Estilos.css"  />
+
+	<p:panel style="min-height: 48px; margin-top:1px; margin-bottom: 2px; background-color:CornflowerBlue ; color:white">
+	<h:outputLabel value="Gerenciador de Produtos 1.0 - ©2018 Kleber Pedrosa" style="color: white"/>
+	</p:panel>
+      
+    	<h2>Lista de produtos</h2>
+ 
+ 		 <h:form>
+		 <p:dataTable var="produto" value="#{Controlador.consulta}">
+		    <p:column headerText="Id">
+		        <h:commandLink value="#{produto.id}" action="#{Controlador.carregarProduto}" >
+		        	<f:param name="produtoid" value="#{produto.id}"/>
+		        </h:commandLink>
+		    </p:column>
+		 
+		    <p:column headerText="Nome">
+		        <h:commandLink value="#{produto.nome}" action="#{Controlador.carregarProduto}" >
+		        	<f:param name="produtoid" value="#{produto.id}"/>
+		        </h:commandLink>
+		    </p:column>
+		 
+		    <p:column headerText="Descricao">
+		        <h:outputText value="#{produto.descricao}" />
+		    </p:column>
+		 
+		</p:dataTable>   	
+
+		<h:commandLink value="Novo Produto" action="#{Controlador.adicionarProduto}" style="font-size:16pt; float: right; margin-top: 7px" />
+   		
+    	</h:form>
+    	
+    	<!-- 
+     	<h:form>
+    	   <h:commandButton value="Executar" action="#{Controlador.executarTeste}"></h:commandButton>
+    	</h:form>
+    	-->
+    	
+    	<p>#{Controlador.console}</p>
+    	
+		<p></p>
+		<p:separator style="margin-top:75px" />
+		<p align="center"><small>Gerenciador de Produtos 1.0 - ©2018 Kleber Pedrosa</small></p>
+    	
+    </h:body>
+</html>

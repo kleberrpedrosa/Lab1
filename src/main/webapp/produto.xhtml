@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+      
+	<h:head>
+	<title>Gerenciador de produtos 1.0</title>
+	</h:head>
+	
+    <h:body>
+	
+    <h:outputStylesheet library="css" name="Estilos.css"  />
+  
+	<p:panel style="min-height: 48px; margin-top:1px; margin-bottom: 2px; background-color:CornflowerBlue ; color:white">
+	<h:outputLabel value="Gerenciador de Produtos 1.0 - ©2018 Kleber Pedrosa" style="color: white"/>
+	</p:panel>
+  
+	<h:panelGrid columns="2" style="width: 100%">
+		<h2><a href="index.xhtml">Início</a> » Produto - #{Controlador.produto.nome}</h2>
+	</h:panelGrid>  
+	
+	<h:form id="frmProduto">
+	<p:panel style="min-height: 48px; margin-top:1px; margin-bottom: 2px">
+		<h:commandLink value="Salvar" action="#{Controlador.salvar}" style="font-size:16pt; float: right; margin: 7px" />
+
+	<h:panelGrid columns="2" columnClasses="coluna-label, coluna-valor">
+		<h:outputLabel value="Nome" />
+		<h:inputText id="nome" value="#{Controlador.produto.nome}" style="width: 100%"/>
+		
+		<h:outputLabel value="Descrição" />
+		<h:inputText id="descricao" value="#{Controlador.produto.descricao}" style="width: 100%"/>
+	</h:panelGrid>
+	</p:panel>
+	
+	
+	<p:dataGrid var="img" value="#{Controlador.produto.imagens}" columns="6" layout="grid"
+        rows="12" paginator="true" id="imagens"
+        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+        rowsPerPageTemplate="6,12,16">
+ 
+        <f:facet name="header">
+            Imagens do produto
+        </f:facet>
+ 
+        <p:panel header="#{img.id}" style="text-align:center">
+            <h:panelGrid columns="1" style="width:100%">
+ 				<p:graphicImage name="images/image_placeholder.png" height="80px" width="100px"></p:graphicImage>
+                <h:outputText value="#{img.nome}" />
+                <h:outputText value="Tipo: #{img.tipo}" />
+                 
+            </h:panelGrid>
+        </p:panel>
+ 
+    </p:dataGrid>
+	
+	<p:commandButton value="Adicionar Imagem..." type="button" style="margin-top:16px; float:right" onclick="PF('dlg').show();"></p:commandButton>
+	
+	<p:dialog header="Adicionar Imagem" widgetVar="dlg" minHeight="40">
+
+	
+		<h:panelGrid columns="2" columnClasses="coluna-label, coluna-valor">
+		<h:outputLabel value="Nome" />
+		<h:inputText id="imagemnome" value="Imagem" style="width: 100%"/>
+		
+		<h:outputLabel value="Tipo" />
+		<h:selectOneMenu  id="imagemtipo" style="width: 100%" value="JPG">
+		   <f:selectItem itemValue = "JPG" itemLabel = "JPG" /> 
+		   <f:selectItem itemValue = "PNG" itemLabel = "PNG" /> 
+		   <f:selectItem itemValue = "BMP" itemLabel = "BMP" /> 
+		</h:selectOneMenu>
+		
+		</h:panelGrid>
+
+   		<h:commandButton value="Adicionar" action="#{Controlador.adicionarImagem}"></h:commandButton>
+	
+
+	</p:dialog>	
+
+	
+	</h:form>
+	
+	
+	
+	<p></p>
+	<p:separator style="margin-top:75px" />
+	<p align="center"><small>Gerenciador de Produtos 1.0 - ©2018 Kleber Pedrosa</small></p>
+	
+	</h:body>
+	
+
+	
+	
+	</html>

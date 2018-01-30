@@ -1,0 +1,5 @@
+body {
+    font-family: "Verdana";
+}
+.coluna-label {width: 150px; margin:1px; display:inline-block;}
+.coluna-valor {width: 450px; margin:1px; display:inline-block;}

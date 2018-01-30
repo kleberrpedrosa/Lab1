@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>App</title>
+    </h:head>
+    <h:body>
+	
+    <h:outputStylesheet library="css" name="Estilos.css"  />
+  
+	<h2>Produto - #{Controlador.produto.nome}</h2>
+	
+	<h:form>
+	<div class="coluna-label">Nome</div>
+	<div class="coluna-valor"><h:inputText value="#{Controlador.produto.nome}" style="width: 100%"/></div>
+	<br></br>
+	<div class="coluna-label">Descrição</div>
+	<div class="coluna-valor"><h:inputText value="#{Controlador.produto.descricao}" style="width: 100%"></h:inputText></div>
+	
+	<div style="min-height: 48px"></div>
+	
+	    <p:dataGrid var="img" value="#{Controlador.produto.imagens}" columns="6" layout="grid"
+        rows="12" paginator="true" id="imagens"
+        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+        rowsPerPageTemplate="6,12,16">
+ 
+        <f:facet name="header">
+            Imagens do produto
+        </f:facet>
+ 
+        <p:panel header="#{img.id}" style="text-align:center">
+            <h:panelGrid columns="1" style="width:100%">
+                <!-- <p:graphicImage name="demo/images/car/#{car.brand}.gif"/>  -->
+ 				<p:graphicImage name="images/image_placeholder.png" height="80px" width="100px"></p:graphicImage>
+                <h:outputText value="#{img.nome}" />
+                <h:outputText value="Tipo: #{img.tipo}" />
+                 
+            </h:panelGrid>
+        </p:panel>
+ 
+    </p:dataGrid>
+	</h:form>
+	
+	<h:commandButton value="Adicionar Imagem..." type="button" style="margin-top:16px; float:right" onclick="PF('dlg').show();"></h:commandButton>
+
+	<p:dialog header="Adicionar Imagem" widgetVar="dlg" minHeight="40">
+	<h:form>
+	
+	<div style="display: inline-block; float: left;">
+		<p:graphicImage name="images/image_placeholder.png" height="100px" width="150px" />
+	</div>
+	
+	<div style="display: inline-block; float: right">	
+		<div class="coluna-label">Nome</div>
+		<div class="coluna-valor"><h:inputText id="imagemnome" value="Imagem" style="width: 100%"></h:inputText></div>
+		<br></br>
+		<div class="coluna-label">Descrição</div>
+		<div class="coluna-valor">
+		
+		<h:selectOneMenu id="imagemtipo" style="width: 100%" value="JPG">
+		   <f:selectItem itemValue = "JPG" itemLabel = "JPG" /> 
+		   <f:selectItem itemValue = "PNG" itemLabel = "PNG" /> 
+		   <f:selectItem itemValue = "BMP" itemLabel = "BMP" /> 
+		</h:selectOneMenu>
+		</div>
+	</div>
+	
+   <h:commandButton value="Adicionar" action="#{Controlador.adicionarImagem}"></h:commandButton>
+	
+	</h:form>
+	</p:dialog>	
+	
+    </h:body>
+</html>
